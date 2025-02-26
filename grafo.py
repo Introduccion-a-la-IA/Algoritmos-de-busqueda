@@ -1,6 +1,5 @@
 from collections import deque
-
-
+import heapq
 class Grafo:
 
     def __init__(self, lista_adyacencia):
@@ -10,9 +9,8 @@ class Grafo:
         return self.lista_adyacencia.get(v,[])
 
     # funcion heuristica
-    def h(self, n):
-        #inserte su codigo aqui
-        return H[n] # puede retornar una lista con el calculo de la heuristica para cada estado
+    def h(self, nodo, destino):
+        return abs(nodo[0] - destino[0]) + abs(nodo[1] - destino[1])
     
     def primero_profundidad(self, nodo_inicio, nodo_final):
         visitados = set()
@@ -54,5 +52,31 @@ class Grafo:
         return None  # Si no hay camino
     
     def a_estrella(self, nodo_inicio, nodo_final):
-        #inserte si codigo aqui
+        open_set = []
+        heapq.heappush(open_set, (0, nodo_inicio))
+        came_from = {}
+        g_score = {nodo: float('inf') for nodo in self.lista_adyacencia}
+        g_score[nodo_inicio] = 0
+        f_score = {nodo: float('inf') for nodo in self.lista_adyacencia}
+        f_score[nodo_inicio] = self.h(nodo_inicio, nodo_final)
+        
+        while open_set:
+            _, actual = heapq.heappop(open_set)
+            
+            if actual == nodo_final:
+                camino = []
+                while actual in came_from:
+                    camino.append(actual)
+                    actual = came_from[actual]
+                camino.append(nodo_inicio)
+                return camino[::-1]
+            
+            for vecino in self.obtener_vecinos(actual):
+                tentative_g_score = g_score[actual] + 1
+                if tentative_g_score < g_score[vecino]:
+                    came_from[vecino] = actual
+                    g_score[vecino] = tentative_g_score
+                    f_score[vecino] = tentative_g_score + self.h(vecino, nodo_final)
+                    heapq.heappush(open_set, (f_score[vecino], vecino))
+        
         return None
