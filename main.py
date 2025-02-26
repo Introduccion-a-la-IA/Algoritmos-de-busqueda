@@ -58,8 +58,14 @@ if __name__ == "__main__":
     print(inicio, destino)
     grafo = Grafo(lista_adyacencia)
     
-    ruta = grafo.primero_profundidad(inicio, destino)
-    if ruta:
-        print("Ruta encontrada:", ruta)
+    rutadfs = grafo.primero_profundidad(inicio, destino)
+    if rutadfs:
+        print("Ruta encontrada:", rutadfs)
+    else:
+        print("No se encontró una ruta")
+        
+    rutabfs = grafo.primero_anchura(inicio, destino)
+    if rutabfs:
+        print("Ruta encontrada:", rutabfs)
     else:
         print("No se encontró una ruta")

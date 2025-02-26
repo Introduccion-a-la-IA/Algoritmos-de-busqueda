@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Grafo:
 
     def __init__(self, lista_adyacencia):
@@ -34,8 +37,21 @@ class Grafo:
         return None  # Si no hay solución
         
     def primero_anchura(self, nodo_inicio, nodo_final):
-        #inserte si codigo aqui
-        return None
+        visitados = set()
+        cola = deque([(nodo_inicio, [nodo_inicio])])  # Inicializamos la cola con el nodo inicial
+        
+        while cola:
+            actual, camino = cola.popleft() 
+            if actual == nodo_final:
+                return camino  # Se encontró un camino
+            
+            if actual not in visitados:
+                visitados.add(actual)
+                for vecino in self.obtener_vecinos(actual):
+                    if vecino not in visitados:
+                        cola.append((vecino, camino + [vecino]))  # Encolamos nuevo camino
+
+        return None  # Si no hay camino
     
     def a_estrella(self, nodo_inicio, nodo_final):
         #inserte si codigo aqui
