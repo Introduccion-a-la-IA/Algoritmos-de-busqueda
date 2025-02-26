@@ -60,13 +60,13 @@ if __name__ == "__main__":
     
     rutadfs = grafo.primero_profundidad(inicio, destino)
     if rutadfs:
-        print("\nRuta encontrada:", rutadfs)
+        print("\nRuta encontrada DFS:", rutadfs)
     else:
         print("\nNo se encontró una ruta")
         
     rutabfs = grafo.primero_anchura(inicio, destino)
     if rutabfs:
-        print("\nRuta encontrada:", rutabfs)
+        print("\nRuta encontrada BFS:", rutabfs)
     else:
         print("\nNo se encontró una ruta")
 
