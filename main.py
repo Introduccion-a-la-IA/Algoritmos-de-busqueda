@@ -49,7 +49,7 @@ def matriz_a_lista_adyacencia(matriz):
 
 
 if __name__ == "__main__":
-    nombre_archivo = os.path.join(os.path.dirname(__file__), "laberinto3.txt")
+    nombre_archivo = os.path.join(os.path.dirname(__file__), "laberinto2.txt")
     matriz = leer_matriz_desde_archivo(nombre_archivo)
 
     inicio, destino = encontrar_puntos_especiales(matriz)
