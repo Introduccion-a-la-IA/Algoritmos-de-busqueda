@@ -49,7 +49,7 @@ def matriz_a_lista_adyacencia(matriz):
 
 
 if __name__ == "__main__":
-    nombre_archivo = os.path.join(os.path.dirname(__file__), "laberinto3.txt")
+    nombre_archivo = os.path.join(os.path.dirname(__file__), "laberinto.txt")
     matriz = leer_matriz_desde_archivo(nombre_archivo)
 
     inicio, destino = encontrar_puntos_especiales(matriz)
@@ -69,3 +69,9 @@ if __name__ == "__main__":
         print("Ruta encontrada:", rutabfs)
     else:
         print("No se encontró una ruta")
+
+    ruta_a_estrella = grafo.a_estrella(inicio, destino)
+    if ruta_a_estrella:
+        print("Ruta encontrada con A*:", ruta_a_estrella)
+    else:
+        print("No se encontró una ruta con A*")
