@@ -1,5 +1,6 @@
 from grafo import Grafo
 import os
+from grafica import graficar_ruta
 
 def encontrar_puntos_especiales(matriz):
     inicio = None
@@ -49,7 +50,7 @@ def matriz_a_lista_adyacencia(matriz):
 
 
 if __name__ == "__main__":
-    nombre_archivo = os.path.join(os.path.dirname(__file__), "laberinto.txt")
+    nombre_archivo = os.path.join(os.path.dirname(__file__), "laberinto50.txt")
     matriz = leer_matriz_desde_archivo(nombre_archivo)
 
     inicio, destino = encontrar_puntos_especiales(matriz)
@@ -61,17 +62,21 @@ if __name__ == "__main__":
     rutadfs = grafo.primero_profundidad(inicio, destino)
     if rutadfs:
         print("\nRuta encontrada DFS:", rutadfs)
+        graficar_ruta(rutadfs,50)
+    
     else:
         print("\nNo se encontró una ruta")
         
     rutabfs = grafo.primero_anchura(inicio, destino)
     if rutabfs:
         print("\nRuta encontrada BFS:", rutabfs)
+        graficar_ruta(rutabfs,50)
     else:
         print("\nNo se encontró una ruta")
 
     ruta_a_estrella = grafo.a_estrella(inicio, destino)
     if ruta_a_estrella:
         print("\nRuta encontrada con A*:", ruta_a_estrella)
+        graficar_ruta(ruta_a_estrella,50)
     else:
-        print("\nNo se encontró una ruta con A*")
+        print("\nNo se encontró una ruta con A")
